@@ -45,15 +45,28 @@ h2{
     font-size:20px;
 }
 
-/* OBJETIVOS GRID */
+/* CONTAINER DOS OBJETIVOS */
 #objetivos{
-    width:900px;
+    width:1200px;
     max-width:95%;
     margin:auto;
+}
 
+/* TÍTULOS DAS CATEGORIAS */
+.categoria{
+    text-align:center;
+    color:#55ff55;
+    margin-top:40px;
+    margin-bottom:20px;
+    font-size:30px;
+}
+
+/* GRID DE CADA CATEGORIA */
+.grid-categoria{
     display:grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:repeat(3, 1fr);
     gap:15px;
+    margin-bottom:40px;
 }
 
 /* CARD */
@@ -72,6 +85,7 @@ h2{
 .card h3{
     color:#55ff55;
     margin-bottom:12px;
+    font-size:18px;
 }
 
 .card label{
@@ -88,27 +102,7 @@ input[type=checkbox]{
     margin-right:6px;
 }
 
-/* RESPONSIVO */
-@media(max-width:900px){
-    #objetivos{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media(max-width:600px){
-    #objetivos{
-        grid-template-columns: 1fr;
-    }
-
-    body{
-        padding:15px;
-    }
-
-    h1{
-        font-size:30px;
-    }
-}
-
+/* PODIUM */
 .first{
     background:#2ecc71 !important;
     color:black;
@@ -125,4 +119,33 @@ input[type=checkbox]{
 .third{
     background:#cd7f32 !important;
     color:white;
+}
+
+/* RESPONSIVO */
+@media(max-width:900px){
+
+    .grid-categoria{
+        grid-template-columns:repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .grid-categoria{
+        grid-template-columns:1fr;
+    }
+
+    body{
+        padding:15px;
+    }
+
+    h1{
+        font-size:30px;
+    }
+
+    .categoria{
+        font-size:24px;
+    }
+
 }
