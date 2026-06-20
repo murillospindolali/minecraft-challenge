@@ -42,89 +42,71 @@ console.log("🔥 Firebase conectado com sucesso!");
 
 const objetivos = [
 
-/* =========================
-   🌱 FÁCEIS
-========================= */
-{ nome: "Pegar madeira", pontos: 1 },
-{ nome: "Fazer bancada de trabalho", pontos: 1 },
-{ nome: "Fazer fornalha", pontos: 2 },
-{ nome: "Fazer cama", pontos: 2 },
-{ nome: "Plantar trigo", pontos: 2 },
-{ nome: "Conseguir carvão", pontos: 2 },
-{ nome: "Domesticar um lobo", pontos: 3 },
-{ nome: "Domesticar um gato", pontos: 3 },
-{ nome: "Fazer um barco", pontos: 2 },
-{ nome: "Pescar um peixe", pontos: 3 },
+{ nome: "Pegar madeira", pontos: 1, categoria: "🌱 Fáceis" },
+{ nome: "Fazer bancada de trabalho", pontos: 1, categoria: "🌱 Fáceis" },
+{ nome: "Fazer fornalha", pontos: 2, categoria: "🌱 Fáceis" },
+{ nome: "Fazer cama", pontos: 2, categoria: "🌱 Fáceis" },
+{ nome: "Plantar trigo", pontos: 2, categoria: "🌱 Fáceis" },
+{ nome: "Conseguir carvão", pontos: 2, categoria: "🌱 Fáceis" },
+{ nome: "Domesticar um lobo", pontos: 3, categoria: "🌱 Fáceis" },
+{ nome: "Domesticar um gato", pontos: 3, categoria: "🌱 Fáceis" },
+{ nome: "Fazer um barco", pontos: 2, categoria: "🌱 Fáceis" },
+{ nome: "Pescar um peixe", pontos: 3, categoria: "🌱 Fáceis" },
 
-/* =========================
-   ⛏️ MÉDIOS
-========================= */
-{ nome: "Conseguir ferro", pontos: 3 },
-{ nome: "Fazer armadura completa de ferro", pontos: 5 },
-{ nome: "Fazer escudo", pontos: 3 },
-{ nome: "Conseguir ouro", pontos: 4 },
-{ nome: "Encontrar uma vila", pontos: 5 },
-{ nome: "Conseguir uma esmeralda", pontos: 5 },
-{ nome: "Fazer um mapa", pontos: 4 },
-{ nome: "Encontrar portal em ruínas", pontos: 6 },
-{ nome: "Entrar no Nether", pontos: 7 },
-{ nome: "Conseguir quartzo", pontos: 5 },
+{ nome: "Conseguir ferro", pontos: 3, categoria: "⛏️ Médios" },
+{ nome: "Fazer armadura completa de ferro", pontos: 5, categoria: "⛏️ Médios" },
+{ nome: "Fazer escudo", pontos: 3, categoria: "⛏️ Médios" },
+{ nome: "Conseguir ouro", pontos: 4, categoria: "⛏️ Médios" },
+{ nome: "Encontrar uma vila", pontos: 5, categoria: "⛏️ Médios" },
+{ nome: "Conseguir uma esmeralda", pontos: 5, categoria: "⛏️ Médios" },
+{ nome: "Fazer um mapa", pontos: 4, categoria: "⛏️ Médios" },
+{ nome: "Encontrar portal em ruínas", pontos: 6, categoria: "⛏️ Médios" },
+{ nome: "Entrar no Nether", pontos: 7, categoria: "⛏️ Médios" },
+{ nome: "Conseguir quartzo", pontos: 5, categoria: "⛏️ Médios" },
 
-/* =========================
-   💎 DIFÍCEIS
-========================= */
-{ nome: "Encontrar diamante", pontos: 5 },
-{ nome: "Fazer picareta de diamante", pontos: 8 },
-{ nome: "Armadura completa de diamante", pontos: 12 },
-{ nome: "Conseguir obsidiana", pontos: 6 },
-{ nome: "Encantar um item", pontos: 10 },
-{ nome: "Fortaleza do Nether", pontos: 12 },
-{ nome: "Conseguir Blaze Rod", pontos: 10 },
-{ nome: "Conseguir Pérola do End", pontos: 8 },
-{ nome: "Mansão da Floresta", pontos: 20 },
-{ nome: "Cidade Antiga", pontos: 20 },
+{ nome: "Encontrar diamante", pontos: 5, categoria: "💎 Difíceis" },
+{ nome: "Fazer picareta de diamante", pontos: 8, categoria: "💎 Difíceis" },
+{ nome: "Armadura completa de diamante", pontos: 12, categoria: "💎 Difíceis" },
+{ nome: "Conseguir obsidiana", pontos: 6, categoria: "💎 Difíceis" },
+{ nome: "Encantar um item", pontos: 10, categoria: "💎 Difíceis" },
+{ nome: "Fortaleza do Nether", pontos: 12, categoria: "💎 Difíceis" },
+{ nome: "Conseguir Blaze Rod", pontos: 10, categoria: "💎 Difíceis" },
+{ nome: "Conseguir Pérola do End", pontos: 8, categoria: "💎 Difíceis" },
+{ nome: "Mansão da Floresta", pontos: 20, categoria: "💎 Difíceis" },
+{ nome: "Cidade Antiga", pontos: 20, categoria: "💎 Difíceis" },
 
-/* =========================
-   🔥 MUITO DIFÍCEIS
-========================= */
-{ nome: "Conseguir Netherite", pontos: 15 },
-{ nome: "Ferramenta de Netherite", pontos: 20 },
-{ nome: "Armadura completa de Netherite", pontos: 30 },
-{ nome: "Encontrar Elytra", pontos: 35 },
-{ nome: "Matar o Wither", pontos: 30 },
-{ nome: "Matar o Ender Dragon", pontos: 40 },
-{ nome: "Totem da Imortalidade", pontos: 25 },
-{ nome: "Cidade do End", pontos: 20 },
-{ nome: "Ovo de dragão", pontos: 50 },
-{ nome: "Beacon funcionando", pontos: 40 },
+{ nome: "Conseguir Netherite", pontos: 15, categoria: "🔥 Muito Difíceis" },
+{ nome: "Ferramenta de Netherite", pontos: 20, categoria: "🔥 Muito Difíceis" },
+{ nome: "Armadura completa de Netherite", pontos: 30, categoria: "🔥 Muito Difíceis" },
+{ nome: "Encontrar Elytra", pontos: 35, categoria: "🔥 Muito Difíceis" },
+{ nome: "Matar o Wither", pontos: 30, categoria: "🔥 Muito Difíceis" },
+{ nome: "Matar o Ender Dragon", pontos: 40, categoria: "🔥 Muito Difíceis" },
+{ nome: "Totem da Imortalidade", pontos: 25, categoria: "🔥 Muito Difíceis" },
+{ nome: "Cidade do End", pontos: 20, categoria: "🔥 Muito Difíceis" },
+{ nome: "Ovo de dragão", pontos: 50, categoria: "🔥 Muito Difíceis" },
+{ nome: "Beacon funcionando", pontos: 40, categoria: "🔥 Muito Difíceis" },
 
-/* =========================
-   🏠 CONSTRUÇÃO
-========================= */
-{ nome: "Casa mais bonita (votação)", pontos: 20 },
-{ nome: "Base mais bonita", pontos: 30 },
-{ nome: "Fazenda automática", pontos: 20 },
-{ nome: "Melhor decoração interna", pontos: 15 },
-{ nome: "Melhor ponte", pontos: 10 },
-{ nome: "Melhor fazenda de animais", pontos: 10 },
-{ nome: "Melhor armazenamento organizado", pontos: 15 },
-{ nome: "Portal do Nether decorado", pontos: 15 },
-{ nome: "Melhor jardim", pontos: 10 },
-{ nome: "Melhor castelo ou torre", pontos: 25 },
+{ nome: "Casa mais bonita (votação)", pontos: 20, categoria: "🏠 Construção" },
+{ nome: "Base mais bonita", pontos: 30, categoria: "🏠 Construção" },
+{ nome: "Fazenda automática", pontos: 20, categoria: "🏠 Construção" },
+{ nome: "Melhor decoração interna", pontos: 15, categoria: "🏠 Construção" },
+{ nome: "Melhor ponte", pontos: 10, categoria: "🏠 Construção" },
+{ nome: "Melhor fazenda de animais", pontos: 10, categoria: "🏠 Construção" },
+{ nome: "Melhor armazenamento organizado", pontos: 15, categoria: "🏠 Construção" },
+{ nome: "Portal do Nether decorado", pontos: 15, categoria: "🏠 Construção" },
+{ nome: "Melhor jardim", pontos: 10, categoria: "🏠 Construção" },
+{ nome: "Melhor castelo ou torre", pontos: 25, categoria: "🏠 Construção" },
 
-/* =========================
-   😂 EXTRAS
-========================= */
-{ nome: "Cair na lava e sobreviver", pontos: 5 },
-{ nome: "Achar templo do deserto", pontos: 8 },
-{ nome: "Achar navio naufragado", pontos: 5 },
-{ nome: "Encontrar tesouro enterrado", pontos: 10 },
-{ nome: "Domesticar um cavalo", pontos: 5 },
-{ nome: "Criar golem de ferro", pontos: 10 },
-{ nome: "Conseguir tridente", pontos: 15 },
-{ nome: "Maçã dourada encantada", pontos: 40 },
-{ nome: "Conseguir disco de música", pontos: 10 },
-{ nome: "Aldeão com profissão útil", pontos: 8 }
+{ nome: "Cair na lava e sobreviver", pontos: 5, categoria: "😂 Extras" },
+{ nome: "Achar templo do deserto", pontos: 8, categoria: "😂 Extras" },
+{ nome: "Achar navio naufragado", pontos: 5, categoria: "😂 Extras" },
+{ nome: "Encontrar tesouro enterrado", pontos: 10, categoria: "😂 Extras" },
+{ nome: "Domesticar um cavalo", pontos: 5, categoria: "😂 Extras" },
+{ nome: "Criar golem de ferro", pontos: 10, categoria: "😂 Extras" },
+{ nome: "Conseguir tridente", pontos: 15, categoria: "😂 Extras" },
+{ nome: "Maçã dourada encantada", pontos: 40, categoria: "😂 Extras" },
+{ nome: "Conseguir disco de música", pontos: 10, categoria: "😂 Extras" },
+{ nome: "Aldeão com profissão útil", pontos: 8, categoria: "😂 Extras" }
 
 ];
 
@@ -253,27 +235,45 @@ onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
    CRIAR INTERFACE
 ========================= */
 
-objetivos.forEach((obj) => {
+const categorias = [...new Set(objetivos.map(o => o.categoria))];
 
-    const card = document.createElement("div");
-    card.className = "card";
+categorias.forEach(categoria => {
 
-    let html = `<h3>${obj.nome} (${obj.pontos} pts)</h3>`;
+    const titulo = document.createElement("h2");
+    titulo.className = "categoria";
+    titulo.textContent = categoria;
 
-    jogadores.forEach((jogador) => {
+    div.appendChild(titulo);
 
-        html += `
-        <label>
-            <input type="checkbox"
-                data-jogador="${jogador}"
-                data-objetivo="${obj.nome}">
-            ${jogador}
-        </label>
-        `;
-    });
+    const grid = document.createElement("div");
+    grid.className = "grid-categoria";
 
-    card.innerHTML = html;
-    div.appendChild(card);
+    objetivos
+        .filter(obj => obj.categoria === categoria)
+        .forEach(obj => {
+
+            const card = document.createElement("div");
+            card.className = "card";
+
+            let html = `<h3>${obj.nome} (${obj.pontos} pts)</h3>`;
+
+            jogadores.forEach(jogador => {
+
+                html += `
+                <label>
+                    <input type="checkbox"
+                        data-jogador="${jogador}"
+                        data-objetivo="${obj.nome}">
+                    ${jogador}
+                </label>
+                `;
+            });
+
+            card.innerHTML = html;
+            grid.appendChild(card);
+        });
+
+    div.appendChild(grid);
 });
 
 /* =========================
