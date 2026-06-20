@@ -1,4 +1,3 @@
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
     getFirestore,
@@ -7,9 +6,15 @@ import {
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+/* =========================
+   ELEMENTOS DO DOM
+========================= */
+
 const murilloEl = document.getElementById("murillo");
 const leoEl = document.getElementById("leo");
 const kauaEl = document.getElementById("kaua");
+
+const div = document.getElementById("objetivos");
 
 console.log("Minecraft Challenge iniciado!");
 
@@ -46,21 +51,11 @@ const objetivos = [
 
 const jogadores = ["Murillo", "Léo", "Kauã"];
 
-const div = document.getElementById("objetivos");
-
 /* =========================
-   ESTADO DO JOGO (PROGRESSO REAL)
+   ESTADO GLOBAL (CORRIGIDO)
 ========================= */
 
-let progresso = {
-    Murillo: {},
-    Léo: {},
-    Kauã: {}
-};
-
-/* =========================
-   PONTOS CALCULADOS
-========================= */
+let progresso = null;
 
 let pontos = {
     Murillo: 0,
@@ -69,15 +64,17 @@ let pontos = {
 };
 
 /* =========================
-   PASSO 4 — SALVAR NO FIREBASE
+   SALVAR NO FIREBASE (SEGURADO)
 ========================= */
 
 async function salvarProgresso() {
+    if (!progresso) return;
+
     await setDoc(doc(db, "jogo", "progresso"), progresso);
 }
 
 /* =========================
-   PASSO 5 — ATUALIZAR PLACAR
+   RANKING
 ========================= */
 
 function atualizarPlacar() {
@@ -88,13 +85,13 @@ function atualizarPlacar() {
         { nome: "Kauã", pontos: pontos.Kauã, el: kauaEl }
     ];
 
-    // ordena por pontos
     ranking.sort((a, b) => b.pontos - a.pontos);
 
     const container = murilloEl.parentElement;
 
-    // limpa ordem atual
     container.innerHTML = "";
+
+    const classes = ["first", "second", "third"];
 
     ranking.forEach((jogador, index) => {
 
@@ -103,35 +100,14 @@ function atualizarPlacar() {
         el.innerText = `${index + 1}º ${jogador.nome} - ${jogador.pontos} pts`;
 
         el.classList.remove("first", "second", "third");
-
-        const classes = ["first", "second", "third"];
         el.classList.add(classes[index]);
 
-        // re-insere na ordem correta
         container.appendChild(el);
     });
 }
 
 /* =========================
-   PASSO 7 — RECARREGAR CHECKBOX + RECONTAR PONTOS
-========================= */
-
-function atualizarCheckboxes() {
-
-    // marca/desmarca checkboxes conforme Firebase
-    document.querySelectorAll("input[type=checkbox]").forEach(cb => {
-
-        const jogador = cb.dataset.jogador;
-        const objetivo = cb.dataset.objetivo;
-
-        cb.checked = progresso[jogador]?.[objetivo] || false;
-    });
-
-    recalcularPontos();
-}
-
-/* =========================
-   RECONTAR PONTOS (SEM BUG)
+   RECONTAR PONTOS
 ========================= */
 
 function recalcularPontos() {
@@ -141,6 +117,8 @@ function recalcularPontos() {
         Léo: 0,
         Kauã: 0
     };
+
+    if (!progresso) return;
 
     objetivos.forEach(obj => {
 
@@ -156,6 +134,45 @@ function recalcularPontos() {
 
     atualizarPlacar();
 }
+
+/* =========================
+   ATUALIZAR CHECKBOX
+========================= */
+
+function atualizarCheckboxes() {
+
+    if (!progresso) return;
+
+    document.querySelectorAll("input[type=checkbox]").forEach(cb => {
+
+        const jogador = cb.dataset.jogador;
+        const objetivo = cb.dataset.objetivo;
+
+        cb.checked = progresso[jogador]?.[objetivo] || false;
+    });
+
+    recalcularPontos();
+}
+
+/* =========================
+   FIREBASE LISTENER (CORRETO)
+========================= */
+
+onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
+
+    if (snap.exists()) {
+        progresso = snap.data();
+    } else {
+        progresso = {
+            Murillo: {},
+            Léo: {},
+            Kauã: {}
+        };
+        salvarProgresso();
+    }
+
+    atualizarCheckboxes();
+});
 
 /* =========================
    CRIAR INTERFACE
@@ -185,7 +202,7 @@ objetivos.forEach((obj) => {
 });
 
 /* =========================
-   LÓGICA DOS CHECKBOX
+   CHECKBOX LOGIC
 ========================= */
 
 document.addEventListener("change", async (e) => {
@@ -195,10 +212,13 @@ document.addEventListener("change", async (e) => {
         const jogador = e.target.dataset.jogador;
         const objetivo = e.target.dataset.objetivo;
 
+        if (!progresso[jogador]) {
+            progresso[jogador] = {};
+        }
+
         progresso[jogador][objetivo] = e.target.checked;
 
         recalcularPontos();
-
         await salvarProgresso();
     }
 });
