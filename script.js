@@ -160,16 +160,12 @@ function atualizarCheckboxes() {
 
 onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
 
-    if (snap.exists()) {
-        progresso = snap.data();
-    } else {
-        progresso = {
-            Murillo: {},
-            Léo: {},
-            Kauã: {}
-        };
-        salvarProgresso();
+    if (!snap.exists()) {
+        console.log("Sem dados ainda no Firebase");
+        return;
     }
+
+    progresso = snap.data();
 
     atualizarCheckboxes();
 });
