@@ -13,6 +13,8 @@ import {
 const murilloEl = document.getElementById("murillo");
 const leoEl = document.getElementById("leo");
 const kauaEl = document.getElementById("kaua");
+const marianaEl = document.getElementById("mariana");
+const fernandaEl = document.getElementById("fernanda");
 
 const div = document.getElementById("objetivos");
 
@@ -110,7 +112,13 @@ const objetivos = [
 
 ];
 
-const jogadores = ["Murillo", "Léo", "Kauã"];
+const jogadores = [
+    "Murillo",
+    "Léo",
+    "Kauã",
+    "Mariana",
+    "Fernanda"
+];
 
 /* =========================
    ESTADO GLOBAL (CORRIGIDO)
@@ -121,7 +129,9 @@ let progresso = null;
 let pontos = {
     Murillo: 0,
     Léo: 0,
-    Kauã: 0
+    Kauã: 0,
+    Mariana: 0,
+    Fernanda: 0
 };
 
 /* =========================
@@ -141,11 +151,12 @@ async function salvarProgresso() {
 function atualizarPlacar() {
 
     const ranking = [
-        { nome: "Murillo", pontos: pontos.Murillo, el: murilloEl },
-        { nome: "Léo", pontos: pontos.Léo, el: leoEl },
-        { nome: "Kauã", pontos: pontos.Kauã, el: kauaEl }
-    ];
-
+    { nome: "Murillo", pontos: pontos.Murillo, el: murilloEl },
+    { nome: "Léo", pontos: pontos.Léo, el: leoEl },
+    { nome: "Kauã", pontos: pontos.Kauã, el: kauaEl },
+    { nome: "Mariana", pontos: pontos.Mariana, el: marianaEl },
+    { nome: "Fernanda", pontos: pontos.Fernanda, el: fernandaEl }
+];
     ranking.sort((a, b) => b.pontos - a.pontos);
 
     const container = murilloEl.parentElement;
@@ -174,10 +185,12 @@ function atualizarPlacar() {
 function recalcularPontos() {
 
     pontos = {
-        Murillo: 0,
-        Léo: 0,
-        Kauã: 0
-    };
+    Murillo: 0,
+    Léo: 0,
+    Kauã: 0,
+    Mariana: 0,
+    Fernanda: 0
+};
 
     if (!progresso) return;
 
@@ -239,11 +252,16 @@ const categorias = [...new Set(objetivos.map(o => o.categoria))];
 
 categorias.forEach(categoria => {
 
-    const titulo = document.createElement("h2");
-    titulo.className = "categoria";
-    titulo.textContent = categoria;
+const secao = document.createElement("div");
+secao.className = "secao-categoria";
+secao.dataset.categoria = categoria;
 
-    div.appendChild(titulo);
+const titulo = document.createElement("h2");
+titulo.className = "categoria";
+titulo.textContent = categoria;
+
+secao.appendChild(titulo);
+
 
     const grid = document.createElement("div");
     grid.className = "grid-categoria";
@@ -273,7 +291,8 @@ categorias.forEach(categoria => {
             grid.appendChild(card);
         });
 
-    div.appendChild(grid);
+    secao.appendChild(grid);
+    div.appendChild(secao);
 });
 
 /* =========================
@@ -296,4 +315,53 @@ document.addEventListener("change", async (e) => {
         recalcularPontos();
         await salvarProgresso();
     }
+});
+
+/* =========================
+   FILTROS
+========================= */
+
+const botoesFiltro = document.querySelectorAll(".filtro");
+
+botoesFiltro.forEach(botao => {
+
+    botao.addEventListener("click", () => {
+
+        botoesFiltro.forEach(b =>
+            b.classList.remove("ativo")
+        );
+
+        botao.classList.add("ativo");
+
+        const filtro = botao.dataset.filtro;
+
+        document
+            .querySelectorAll(".secao-categoria")
+            .forEach(secao => {
+
+                const categoria = secao.dataset.categoria;
+
+                if (filtro === "todos") {
+                    secao.style.display = "block";
+                    return;
+                }
+
+                const mapa = {
+                    "faceis": "🌱 Fáceis",
+                    "medios": "⛏️ Médios",
+                    "dificeis": "💎 Difíceis",
+                    "muito": "🔥 Muito Difíceis",
+                    "construcao": "🏠 Construção",
+                    "extras": "😂 Extras"
+                };
+
+                secao.style.display =
+                    categoria === mapa[filtro]
+                        ? "block"
+                        : "none";
+
+            });
+
+    });
+
 });
