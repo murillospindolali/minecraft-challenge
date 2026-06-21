@@ -124,7 +124,7 @@ const jogadores = [
    ESTADO GLOBAL (CORRIGIDO)
 ========================= */
 
-let progresso = null;
+let progresso = {};
 
 let pontos = {
     Murillo: 0,
@@ -161,22 +161,18 @@ function atualizarPlacar() {
 
     const container = murilloEl.parentElement;
 
-    container.innerHTML = "";
+container.innerHTML = "";
+
+ranking.forEach((jogador, index) => {
+    const el = document.createElement("div");
+
+    el.innerText = `${index + 1}º ${jogador.nome} - ${jogador.pontos} pts`;
 
     const classes = ["first", "second", "third"];
+    el.classList.add(classes[index] || "");
 
-    ranking.forEach((jogador, index) => {
-
-        const el = jogador.el;
-
-        el.innerText = `${index + 1}º ${jogador.nome} - ${jogador.pontos} pts`;
-
-        el.classList.remove("first", "second", "third");
-        el.classList.add(classes[index]);
-
-        container.appendChild(el);
-    });
-}
+    container.appendChild(el);
+});
 
 /* =========================
    RECONTAR PONTOS
