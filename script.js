@@ -151,32 +151,36 @@ async function salvarProgresso() {
 function atualizarPlacar() {
 
     const ranking = [
-    { nome: "Murillo", pontos: pontos.Murillo, el: murilloEl },
-    { nome: "Léo", pontos: pontos.Léo, el: leoEl },
-    { nome: "Kauã", pontos: pontos.Kauã, el: kauaEl },
-    { nome: "Mariana", pontos: pontos.Mariana, el: marianaEl },
-    { nome: "Fernanda", pontos: pontos.Fernanda, el: fernandaEl }
-];
+        { nome: "Murillo", pontos: pontos.Murillo, el: murilloEl },
+        { nome: "Léo", pontos: pontos.Léo, el: leoEl },
+        { nome: "Kauã", pontos: pontos.Kauã, el: kauaEl },
+        { nome: "Mariana", pontos: pontos.Mariana, el: marianaEl },
+        { nome: "Fernanda", pontos: pontos.Fernanda, el: fernandaEl }
+    ];
+
     ranking.sort((a, b) => b.pontos - a.pontos);
 
-    const container = murilloEl.parentElement;
+    const container = murilloEl?.parentElement;
 
-container.innerHTML = "";
+    if (!container) return; // 🔥 evita erro do null
 
-ranking.forEach((jogador, index) => {
-    const el = document.createElement("div");
-
-    el.innerText = `${index + 1}º ${jogador.nome} - ${jogador.pontos} pts`;
+    container.innerHTML = "";
 
     const classes = ["first", "second", "third"];
-    el.classList.remove("first", "second", "third");
 
-if (index < 3) {
-    el.classList.add(classes[index]);
-}
+    ranking.forEach((jogador, index) => {
 
-    container.appendChild(el);
-});
+        const el = document.createElement("div");
+
+        el.innerText = `${index + 1}º ${jogador.nome} - ${jogador.pontos} pts`;
+
+        // 🔥 só adiciona se existir classe válida
+        if (classes[index]) {
+            el.classList.add(classes[index]);
+        }
+
+        container.appendChild(el);
+    });
 }
 
 /* =========================
