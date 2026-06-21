@@ -249,12 +249,10 @@ onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
 
     console.log("🔥 SNAPSHOT ATIVOU");
 
-    console.log("EXISTE?", snap.exists());
-    console.log("DADOS:", snap.data());
-
     progresso = snap.data() || {};
 
     recalcularPontos();
+    atualizarPlacar();       // 🔥 FORÇA RENDER DO RANKING
     atualizarCheckboxes();
 });
 
