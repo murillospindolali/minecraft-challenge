@@ -247,6 +247,8 @@ onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
     progresso = snap.data();
 
     atualizarCheckboxes();
+
+    recalcularPontos(); // 🔥 ESSA LINHA QUE FALTAVA
 });
 
 /* =========================
