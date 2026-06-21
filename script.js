@@ -173,6 +173,7 @@ ranking.forEach((jogador, index) => {
 
     container.appendChild(el);
 });
+}
 
 /* =========================
    RECONTAR PONTOS
