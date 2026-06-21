@@ -230,7 +230,7 @@ function atualizarCheckboxes() {
         cb.checked = progresso[jogador]?.[objetivo] || false;
     });
 
-    recalcularPontos();
+    
 }
 
 /* =========================
