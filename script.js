@@ -244,8 +244,8 @@ onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
 
     progresso = snap.data() || {};
 
-    recalcularPontos();
     atualizarCheckboxes();
+    recalcularPontos();
 });
 
 /* =========================
