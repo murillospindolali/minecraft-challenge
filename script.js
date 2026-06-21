@@ -169,7 +169,11 @@ ranking.forEach((jogador, index) => {
     el.innerText = `${index + 1}º ${jogador.nome} - ${jogador.pontos} pts`;
 
     const classes = ["first", "second", "third"];
-    el.classList.add(classes[index] || "");
+    el.classList.remove("first", "second", "third");
+
+if (index < 3) {
+    el.classList.add(classes[index]);
+}
 
     container.appendChild(el);
 });
