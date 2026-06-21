@@ -243,7 +243,7 @@ onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
 
     progresso = snap.data() || {};
 
-    recalcularPontos();
+    recalcularPontos(); // já chama atualizarPlacar dentro
     atualizarCheckboxes();
 });
 
