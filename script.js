@@ -239,16 +239,13 @@ function atualizarCheckboxes() {
 
 onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
 
-    if (!snap.exists()) {
-        console.log("Sem dados ainda no Firebase");
-        return;
-    }
+    if (!snap.exists()) return;
 
-    progresso = snap.data();
+    progresso = snap.data() || {};
 
-    atualizarCheckboxes();
+    atualizarCheckboxes(); // só UI
 
-    recalcularPontos(); // 🔥 ESSA LINHA QUE FALTAVA
+    recalcularPontos(); // aqui SEMPRE atualiza ranking
 });
 
 /* =========================
