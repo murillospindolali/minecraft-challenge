@@ -243,9 +243,9 @@ onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
 
     progresso = snap.data() || {};
 
-    atualizarCheckboxes(); // só UI
+    atualizarCheckboxes(); // primeiro sincroniza UI
 
-    recalcularPontos(); // aqui SEMPRE atualiza ranking
+    recalcularPontos();    // depois recalcula ranking
 });
 
 /* =========================
