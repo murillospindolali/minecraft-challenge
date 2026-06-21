@@ -238,7 +238,13 @@ function atualizarCheckboxes() {
 ========================= */
 
 onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
-    console.log("🔥 SNAPSHOT AO VIVO:", snap.data());
+
+    if (!snap.exists()) return;
+
+    progresso = snap.data() || {};
+
+    recalcularPontos();
+    atualizarCheckboxes();
 });
 
 /* =========================
