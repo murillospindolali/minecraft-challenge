@@ -247,15 +247,14 @@ function atualizarCheckboxes() {
 
 onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
 
-    if (!snap.exists()) {
-    progresso = {};
-    recalcularPontos();
-    atualizarCheckboxes();
-    return;
-}
+    console.log("🔥 SNAPSHOT ATIVOU");
+
+    console.log("EXISTE?", snap.exists());
+    console.log("DADOS:", snap.data());
+
     progresso = snap.data() || {};
 
-    recalcularPontos(); // já chama atualizarPlacar dentro
+    recalcularPontos();
     atualizarCheckboxes();
 });
 
