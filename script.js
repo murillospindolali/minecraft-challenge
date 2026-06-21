@@ -38,6 +38,14 @@ const db = getFirestore(app);
 
 console.log("🔥 Firebase conectado com sucesso!");
 
+async function inicializarDoc() {
+    const ref = doc(db, "jogo", "progresso");
+
+    await setDoc(ref, {}, { merge: true });
+}
+
+inicializarDoc();
+
 /* =========================
    DADOS DO JOGO
 ========================= */
@@ -239,8 +247,12 @@ function atualizarCheckboxes() {
 
 onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
 
-    if (!snap.exists()) return;
-
+    if (!snap.exists()) {
+    progresso = {};
+    recalcularPontos();
+    atualizarCheckboxes();
+    return;
+}
     progresso = snap.data() || {};
 
     recalcularPontos(); // já chama atualizarPlacar dentro
