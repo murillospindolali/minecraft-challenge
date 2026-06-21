@@ -238,14 +238,7 @@ function atualizarCheckboxes() {
 ========================= */
 
 onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
-
-    if (!snap.exists()) return;
-
-    progresso = snap.data() || {};
-
-    atualizarCheckboxes(); // primeiro sincroniza UI
-
-    recalcularPontos();    // depois recalcula ranking
+    console.log("🔥 SNAPSHOT AO VIVO:", snap.data());
 });
 
 /* =========================
