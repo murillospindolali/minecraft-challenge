@@ -139,9 +139,9 @@ let pontos = {
 ========================= */
 
 async function salvarProgresso() {
-    if (!progresso) return;
+    const ref = doc(db, "jogo", "progresso");
 
-    await setDoc(doc(db, "jogo", "progresso"), progresso);
+    await setDoc(ref, structuredClone(progresso));
 }
 
 /* =========================
