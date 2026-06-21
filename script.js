@@ -38,14 +38,6 @@ const db = getFirestore(app);
 
 console.log("🔥 Firebase conectado com sucesso!");
 
-async function inicializarDoc() {
-    const ref = doc(db, "jogo", "progresso");
-
-    await setDoc(ref, {}, { merge: true });
-}
-
-inicializarDoc();
-
 /* =========================
    DADOS DO JOGO
 ========================= */
@@ -147,9 +139,9 @@ let pontos = {
 ========================= */
 
 async function salvarProgresso() {
-    const ref = doc(db, "jogo", "progresso");
+    if (!progresso) return;
 
-    await setDoc(ref, structuredClone(progresso));
+    await setDoc(doc(db, "jogo", "progresso"), progresso);
 }
 
 /* =========================
@@ -197,36 +189,28 @@ function atualizarPlacar() {
 
 function recalcularPontos() {
 
-    // zera tudo sempre (evita bug de acumular pontos errados)
     pontos = {
-        Murillo: 0,
-        Léo: 0,
-        Kauã: 0,
-        Mariana: 0,
-        Fernanda: 0
-    };
+    Murillo: 0,
+    Léo: 0,
+    Kauã: 0,
+    Mariana: 0,
+    Fernanda: 0
+};
 
-    // se não tiver progresso, só atualiza ranking zerado
-    if (!progresso) {
-        atualizarPlacar();
-        return;
-    }
+    if (!progresso) return;
 
-    // percorre todos os objetivos
     objetivos.forEach(obj => {
 
-        jogadores.forEach(jogador => {
+        jogadores.forEach(j => {
 
-            // garante que existe estrutura
-            if (progresso[jogador] && progresso[jogador][obj.nome] === true) {
-                pontos[jogador] += obj.pontos;
+            if (progresso[j]?.[obj.nome]) {
+                pontos[j] += obj.pontos;
             }
 
         });
 
     });
 
-    // atualiza ranking na tela
     atualizarPlacar();
 }
 
@@ -246,7 +230,7 @@ function atualizarCheckboxes() {
         cb.checked = progresso[jogador]?.[objetivo] || false;
     });
 
-    
+
 }
 
 /* =========================
@@ -254,13 +238,13 @@ function atualizarCheckboxes() {
 ========================= */
 
 onSnapshot(doc(db, "jogo", "progresso"), (snap) => {
+    console.log("🔥 SNAPSHOT AO VIVO:", snap.data());
 
-    console.log("🔥 SNAPSHOT ATIVOU");
+    if (!snap.exists()) return;
 
     progresso = snap.data() || {};
 
     recalcularPontos();
-    atualizarPlacar();       // 🔥 FORÇA RENDER DO RANKING
     atualizarCheckboxes();
 });
 
