@@ -6,12 +6,12 @@
 }
 
 body{
-    background:
-    linear-gradient(
-        rgba(0,0,0,.70),
-        rgba(0,0,0,.70)
-    ),
-    url("./minecraft-bg.jpg");
+    background-image:
+linear-gradient(
+    rgba(0,0,0,.70),
+    rgba(0,0,0,.70)
+),
+url("./minecraft-bg.jpg");
 
     background-size:cover;
     background-position:center;
