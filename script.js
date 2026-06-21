@@ -197,28 +197,36 @@ function atualizarPlacar() {
 
 function recalcularPontos() {
 
+    // zera tudo sempre (evita bug de acumular pontos errados)
     pontos = {
-    Murillo: 0,
-    Léo: 0,
-    Kauã: 0,
-    Mariana: 0,
-    Fernanda: 0
-};
+        Murillo: 0,
+        Léo: 0,
+        Kauã: 0,
+        Mariana: 0,
+        Fernanda: 0
+    };
 
-    if (!progresso) return;
+    // se não tiver progresso, só atualiza ranking zerado
+    if (!progresso) {
+        atualizarPlacar();
+        return;
+    }
 
+    // percorre todos os objetivos
     objetivos.forEach(obj => {
 
-        jogadores.forEach(j => {
+        jogadores.forEach(jogador => {
 
-            if (progresso[j]?.[obj.nome]) {
-                pontos[j] += obj.pontos;
+            // garante que existe estrutura
+            if (progresso[jogador] && progresso[jogador][obj.nome] === true) {
+                pontos[jogador] += obj.pontos;
             }
 
         });
 
     });
 
+    // atualiza ranking na tela
     atualizarPlacar();
 }
 
